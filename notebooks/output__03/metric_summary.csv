@@ -1,4 +1,4 @@
 Condition,alpha,n,purity,coherence,mean_lambda,dominant_field,Jaccard_vs_BH
-Pure BasinHop,1.0,20,0.4,0.0964,0.0732,anatomy,1.0
-ArrowSpace-augmented (0.35),0.35,20,0.4,0.1148,0.0347,anatomy,0.538
-Pure ArrowSpace,0.0,20,0.25,0.1015,0.0122,anatomy,0.143
+Pure BasinHop,1.0,20,0.4,0.0964,0.0598,anatomy,1.0
+ArrowSpace-augmented (0.35),0.35,20,0.35,0.0995,0.0298,anatomy,0.6
+Pure ArrowSpace,0.0,20,0.25,0.105,0.0081,anatomy,0.176
