@@ -1,0 +1,6 @@
+idx,label,sentence,score,lambda,sbh
+63,anatomy,Cartilage protected the knee from constant friction.,0.0,0.01734320039426939,0.0
+71,anatomy,A synapse transmits information between neighbouring neurons.,0.04352132726141982,0.10744995870644904,0.04352132726141982
+60,anatomy,The tendon connects muscle to bone at the joint.,0.06064087048880709,0.11536398643352126,0.06064087048880709
+35,cooking,The stockpot filled the kitchen with a savoury smell.,0.07511812185935551,0.14196729148045756,0.07511812185935551
+49,emotions,A quiet sense of dread settled over the empty room.,0.08124506750878455,0.033121908950970044,0.08124506750878455
