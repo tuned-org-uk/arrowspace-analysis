@@ -1,0 +1,5 @@
+Phase,Purity,Mean λ_full,Jaccard vs AS
+ArrowSpace (λ_full),0.917,0.0,1.0
+PCA-Cosine,1.0,0.0,0.0
+KDE,0.917,0.0,0.0
+DiffMaps,0.917,0.0,0.0

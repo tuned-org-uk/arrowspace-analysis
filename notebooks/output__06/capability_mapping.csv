@@ -1,0 +1,6 @@
+Capability,Phase,Variable,Purity,Mean λ_full,Jaccard vs AS
+Search,TauModeScore,lambda_full,0.917,0.0,1.0
+Analysis,FeatureSpectralScore (best layer),lf_layer[best],0.917,0.0,1.0
+Clustering,FiedlerVectorScore (≈ KDE),v_kde,0.917,0.0,0.0
+Classification,BoundaryEnergyScore (≈ R_spec),R_spec,0.5,0.0,0.043
+Compression,EnergyDiffusionScore (≈ DiffMaps),v_diff,0.917,0.0,0.0
