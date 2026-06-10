@@ -1,8 +1,0 @@
-Method,Purity,Mean λ_full,Jaccard vs AS
-ArrowSpace (λ_full),0.417,0.021,1.0
-PCA-Cosine,1.0,0.172,0.091
-KDE,0.917,0.168,0.143
-DiffMaps,0.917,0.191,0.091
-PCA-Cosine + R_spec (α=0.10),1.0,0.172,0.091
-KDE + R_spec (α=0.00),0.917,0.379,0.0
-DiffMaps + R_spec (α=0.00),0.917,0.379,0.0
