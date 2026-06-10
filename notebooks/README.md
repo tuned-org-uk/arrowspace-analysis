@@ -131,63 +131,9 @@ Boundary analysis is interpreted as:
 
 ---
 
-## 5. α sweeps as a spectral dial
+## 5. Comparison
 
-To understand the interaction between vanilla geometry and ArrowSpace spectrum, notebooks sweep
-
-$$ \alpha \in [0,1] $$
-
-in the spectral-only augmentation formula and track:
-
-- Cluster purity vs α.
-- Mean full λ vs α.
-
-**Principle 5.** α sweeps are always interpreted as:
-
-- α → 1: "turn off" ArrowSpace and keep only vanilla.
-- α → 0: "turn off" vanilla and keep only ArrowSpace spectral component.
-
-We look for:
-
-- Purity peaks at intermediate α → **optimal spectral correction**.
-- Monotonic increase of mean λ as α → 1 → **spectral signal is not redundant**.
-
-Results are visualised with line plots per method (KDE, DiffMaps, BasinHop) and grouped bar charts across methods.[cite:52]
-
----
-
-## 6. Independence checks between signals
-
-Any claim that ArrowSpace adds information must be backed by independence checks:
-
-- Scatter plots of `R_spec` vs KDE score (`1 − density`).
-- Scatter plots of `R_spec` vs diffusion distance.
-- Pearson correlation values annotated on the plots.[cite:52]
-
-**Principle 6.** If the correlation between `R_spec` and a vanilla score is near zero (or at most weak), then spectral augmentation is justified:
-
-- The spectral component is **not** a disguised copy of the vanilla metric.
-- Blending them cannot be replaced by a rescaling of the vanilla score.
-
----
-
-## 7. Reproducibility and wiring invariants
-
-The notebooks follow ArrowSpace wiring invariants from the main design documents:[file:11][file:13][file:15]
-
-- Feature graph L is built once per experiment from high-dimensional embeddings (or imported from an ArrowSpace index).
-- k-NN wiring in feature-space is symmetric and uses cosine similarity, matching ArrowSpace defaults.
-- All Rayleigh energies are normalised to $$[0,1]$$ before comparisons.
-- Random seeds are fixed for synthetic data and stochastic algorithms.
-
-**Principle 7.** Any change to graph wiring (k, similarity function, normalisation) or to the λ decomposition must be:
-
-- Explicitly described in the notebook markdown.
-- Reflected in the experiment metadata and chart captions.
-
-This keeps ArrowSpace experiments comparable across notebooks and over time.
-
----
+For mechanistic interpretability, that means every ArrowSpace claim should be tested against at least four controls: cosine-only retrieval, random graph wiring, shuffled labels or prompts, and a non-spectral manifold baseline such as k-NN density or diffusion distance
 
 ## How to extend these experiments
 
