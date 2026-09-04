@@ -149,11 +149,11 @@ You will see:
 - Dataset README + MIT license: `dataset/`
 - Repo principles: `notebooks/README.md` (API scores only; $\lambda\tau$ is a final score)''')
 
-md(nb, r'---\n## 0 · Imports, dataset, and the prescribed hyperparameters')
+md(nb, r'## 0 · Imports, dataset, and the prescribed hyperparameters')
 
 code(nb, DATA_CELL.replace("output__DATASETDIR", "output__intro"))
 
-md(nb, r'''---\n## 1 · The build returns an index *and* the wiring
+md(nb, r'''## 1 · The build returns an index *and* the wiring
 
 `with_dims_reduction(False, None)` keeps the analysis honest: no Johnson–Lindenstrauss
 projection between our 128 dimensions and $L_F$.''')
@@ -216,7 +216,7 @@ sits near $\lambda\tau \approx 0.02$ while the sparser clusters sit roughly four
 with rank correlation $\approx -0.4$ against an item's effective dimension count. Coherent,
 energy-spread items are spectrally smooth; sparse/rough items are not.''')
 
-md(nb, r'''---\n## 2 · `search(q, gl, tau)`: tau is the cosine $\leftrightarrow$ spectral dial
+md(nb, r'''## 2 · `search(q, gl, tau)`: tau is the cosine $\leftrightarrow$ spectral dial
 
 `tau` weights the geometric term; $1-\tau$ weights the spectral ($\lambda\tau$) term.
 Passing `k=N` returns the full ranking, so we can *measure* what the blend does instead
@@ -273,7 +273,7 @@ print(f"tau=1.0 reproduces cosine exactly; at tau=0.1 the post-window tail is la
       f"(rho={r_low}). Own-basin retrieval held at 100/100 throughout — the blend cost was paid "
       "by the tail, not the window.")''')
 
-md(nb, r'''---\n## 3 · Error contract and a Principle-0 caution
+md(nb, r'''## 3 · Error contract and a Principle-0 caution
 
 Queries go through `try_prepare_query_item` against the graph wiring, and every recoverable
 failure surfaces as a catchable `ValueError` (0.27 typed errors — never a
@@ -304,7 +304,7 @@ rho = float(spearmanr(R_manual, lam).statistic)
 print(f"manual x^T L_F x vs API lambda-tau: spearman = {rho:.3f},  mean abs diff = {mad:.3f}")
 print("  -> not the same numbers; only the API's are the index's.")''')
 
-md(nb, r'''---\n## 4 · Summary''')
+md(nb, r'''## 4 · Summary''')
 
 code(nb, '''\
 summary = pd.DataFrame({
@@ -404,11 +404,11 @@ dimensions), so `sequence_by_graph(gl)` seriates *dimensions*, while
 clusters of increasing sparsity) built with the README-prescribed `eps=0.5, sigma=0.5,
 k=12`; cluster labels recovered in-notebook by k-means and never shown to the index.''')
 
-md(nb, r'---\n## 0 · Imports, dataset, and the prescribed hyperparameters')
+md(nb, r'## 0 · Imports, dataset, and the prescribed hyperparameters')
 
 code(nb, DATA_CELL.replace("output__DATASETDIR", "output__sequencing"))
 
-md(nb, r'---\n## 1 · Build the index and health-check it')
+md(nb, r'## 1 · Build the index and health-check it')
 
 code(nb, '''\
 aspace, gl = (
@@ -424,7 +424,7 @@ print(f"nitems={aspace.nitems}  nfeatures={aspace.nfeatures}  nclusters={aspace.
 print(f"L_F shape={gl.shape()}  degenerate lambdas: {n_degenerate} / {len(lam)}")
 assert n_degenerate < 0.05 * len(lam), "too many degenerate lambdas: honour the README eps"''')
 
-md(nb, r'''---\n## 2 · `sequence_by_lambda` — the spectral curriculum
+md(nb, r'''## 2 · `sequence_by_lambda` — the spectral curriculum
 
 Ascending $\lambda\tau$: spectrally smooth, energy-spread items first; sparse/rough items
 last. `positions` carry the score itself.''')
@@ -493,7 +493,7 @@ its deciles drift toward the sparse cluster (first decile 0.18 -> last 0.44; the
 deciles are noisy) down the dataset's density→sparsity gradient. The direction is
 trustworthy; the per-decile values are not — *train on the head, audit the tail*.''')
 
-md(nb, r'''---\n## 3 · `sequence_by_graph` — seriation of the feature Laplacian
+md(nb, r'''## 3 · `sequence_by_graph` — seriation of the feature Laplacian
 
 `sequence_by_graph(gl)` walks the minimum spanning forest of $L_F$ in DFS preorder from
 approximate diameter endpoints: one contiguous block per connected component, ordered by
@@ -574,7 +574,7 @@ plt.show()
 assert len(runs) == ser_s.components, "each component must occupy one contiguous run"
 assert ser_s.components > 10, "the sparse wiring should genuinely fragment the dimension graph"''')
 
-md(nb, r'''---\n## 4 · Guardrails''')
+md(nb, r'''## 4 · Guardrails''')
 
 code(nb, '''\
 try:
@@ -586,7 +586,7 @@ s_list = sequence_by_lambda([0.2, 0.9, 0.5])          # plain lists are accepted
 print("list input order:", np.asarray(s_list.order), "positions:", np.asarray(s_list.positions))
 assert np.array_equal(np.asarray(s_list.order), [0, 2, 1])''')
 
-md(nb, r'---\n## 5 · Summary')
+md(nb, r'## 5 · Summary')
 
 code(nb, '''\
 summary = pd.DataFrame({
@@ -707,11 +707,11 @@ of increasing sparsity) with the README-prescribed `eps=0.5, sigma=0.5, k=12`. A
 $L_F$ finally gives the eigen-side detector a graph large enough to triangulate —
 on $D=12$ toys it collapses to one set.''')
 
-md(nb, r'---\n## 0 · Imports, dataset, and the prescribed hyperparameters')
+md(nb, r'## 0 · Imports, dataset, and the prescribed hyperparameters')
 
 code(nb, DATA_CELL.replace("output__DATASETDIR", "output__motives"))
 
-md(nb, r'''---\n## 1 · EigenMaps motifs: feature space *and* item space
+md(nb, r'''## 1 · EigenMaps motifs: feature space *and* item space
 
 Two entry points since 0.28. `spot_motives_eigen` runs directly on the $128\times128$
 $L_F$ and returns groups of *dimensions* (the node space is now documented — #165).
@@ -794,7 +794,7 @@ per-cluster activity ratios (mid-column contrast) — those are the interesting 
 candidates for cluster-support signatures. The activity panel is where a motif earns or
 loses its interpretation.''')
 
-md(nb, r'''---\n## 2 · The energy APIs refuse EigenMaps builds (#35)
+md(nb, r'''## 2 · The energy APIs refuse EigenMaps builds (#35)
 
 Before 0.27.3, `spot_motives_energy` on an EigenMaps build silently returned $F\times F$
 node ids as if they were item indices — a namespace bug. Now the typed
@@ -821,7 +821,7 @@ except TypeError as e:
     print(f"unknown cfg key -> TypeError: {str(e)[:72]}...")
 ''')
 
-md(nb, r'''---\n## 3 · EnergyMaps build — where item-level motifs live
+md(nb, r'''## 3 · EnergyMaps build — where item-level motifs live
 
 Subcentroid granularity drives everything: the default clustering collapses this dataset
 to a handful of centroids (below $F$), and every motif swallows the corpus. Force the
@@ -849,7 +849,7 @@ assert aspace_e.nclusters > D, "subcentroid graph must exceed F for item-space m
 # (0.28.0 note: at max_clusters=300 the corrected subcentroid coordinates fuse into one
 #  corpus-sized motif; 600 splits fine enough for basin-resolved item motifs.)''')
 
-md(nb, r'---\n## 4 · `spot_motives_energy` — motifs in *item* space')
+md(nb, r'## 4 · `spot_motives_energy` — motifs in *item* space')
 
 code(nb, '''\
 MOTIVE_CFG_E = {"top_l": 8, "min_triangles": 1, "min_clust": 0.0,
@@ -892,7 +892,7 @@ at sizes the eigen track cannot express, and the largest is a multi-basin union 
 tracks how much inter-basin wiring survived top-$L$ pruning. Same detector, two
 resolutions — pick the track that matches the question.''')
 
-md(nb, r'''---\n## 5 · `spot_subg_motives` — subgraph dicts with optional Rayleigh cohesion
+md(nb, r'''## 5 · `spot_subg_motives` — subgraph dicts with optional Rayleigh cohesion
 
 Same detection pass, dict output. `rayleigh_max` **doubles as the switch that populates
 the `"rayleigh"` field** — left unset the field is `None` (#35 finding 2), which reads like
@@ -934,7 +934,7 @@ precision — exactly what "cohesive subgraph" means spectrally. The $0.1$ thres
 from binding at this scale; it exists to *reject* rough sets on coarser wirings. `x_dim`
 counts the subcentroids in the set; `nfeatures` is the feature-space dimension.''')
 
-md(nb, r'''---\n## 6 · `spot_subg_centroids` — the centroid hierarchy''')
+md(nb, r'''## 6 · `spot_subg_centroids` — the centroid hierarchy''')
 
 code(nb, '''\
 CENTROID_CFG = {"eps": 0.5, "k": 12, "topk": 4, "p": 2.0, "sigma": 0.5,
@@ -955,7 +955,7 @@ ax.set_title("one subgraph dict per hierarchy level")
 fig.savefig(OUT / "fig_05_centroid_levels.png")
 plt.show()''')
 
-md(nb, r'''---\n## 7 · Energy-mode search contracts
+md(nb, r'''## 7 · Energy-mode search contracts
 
 Energy indexes swap the query-side API: `search_energy(q, gl, k)` replaces the $\tau$-blended
 search, `search_batch` is refused (`NotImplementedError`, #123), and
@@ -978,7 +978,7 @@ try:
 except ValueError as e:
     print(f"eigen item-motifs on EnergyMaps -> ValueError: {str(e)[:60]}...")''')
 
-md(nb, r'---\n## 8 · Summary')
+md(nb, r'## 8 · Summary')
 
 code(nb, '''\
 df_sum = pd.DataFrame({
