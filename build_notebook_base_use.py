@@ -363,6 +363,28 @@ md(nb, r'''# Base-use 01 — The ArrowSpace Sequencing API (`sequence_by_lambda`
 Laplacian. Both are *sets* of numbers — what does a principled **total ordering** of them
 look like, and what is each ordering good for?
 
+**Background — sequencing.** Sequencing is the problem of turning a set into a principled
+*total order*. It has two classical roots. *Seriation* — from archaeology and numerical
+taxonomy — orders objects so that similar ones sit adjacent; modern variants order graph
+nodes by spectral coordinates (the Fiedler vector) to compress matrices into banded form.
+*Curriculum learning* (Bengio et al. 2009) orders training data easy → hard, so a model
+sees coherent structure before edge cases; its perennial pain point is the difficulty
+signal, usually a hand-designed proxy.
+
+**Curriculum in this context.** A *spectral curriculum* is an unsupervised easy → hard
+ordering of the items where "difficulty" is spectral roughness: items deep inside a basin
+carry low Rayleigh energy (low $\lambda\tau$), boundary and transition items carry high.
+Ascending $\lambda\tau$ therefore *is* a curriculum — no difficulty labels, no proxies,
+the same signal search already blends with geometry.
+
+**What ArrowSpace contributes.** The ordering is not a separate optimisation bolted onto
+the index — it is a *readout* of the per-item $\lambda\tau$ statistics and Laplacian
+wiring the index already computed for search. One build yields two deterministic orderings
+(documented tie-breaking, no new hyperparameters): the item-space curriculum
+(`sequence_by_lambda`) and a graph-side seriation (`sequence_by_graph`, DFS over the
+minimum spanning forest with a contiguity guarantee per connected component) — the
+classical seriation objective, obtained as a walk rather than an eigenvector solve.
+
 Since arrowspace 0.27 the Python bindings expose two module-level sequencing functions:
 
 | Call | Orders | Positions report | Use case |
