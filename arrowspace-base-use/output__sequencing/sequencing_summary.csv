@@ -1,8 +1,8 @@
 quantity,value
-lambda curriculum: mean windowed purity,0.641
+lambda curriculum: mean windowed purity,0.532
 lambda curriculum: random-order baseline,0.429
-sparse-cluster share: first decile,0.05
-sparse-cluster share: last decile,0.43
-"graph seriation: bandwidth (sparse, identity)",25.442
-"graph seriation: bandwidth (sparse, seriated)",23.096
-graph seriation: components (sparse),100.0
+sparse-cluster share: first decile,0.18
+sparse-cluster share: last decile,0.44
+"graph seriation: bandwidth (sparse, identity)",32.274
+"graph seriation: bandwidth (sparse, seriated)",34.111
+graph seriation: components (sparse),42.0
