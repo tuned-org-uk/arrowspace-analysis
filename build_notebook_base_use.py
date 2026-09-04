@@ -163,6 +163,7 @@ aspace, gl = (
     ArrowSpaceBuilder()
     .with_seed(SEED)
     .with_dims_reduction(False, None)
+    .with_sampling("simple", 1.0)   # ArrowSpaceBuilder defaults to 0.6 sampling; keep all items
     .build(GRAPH_PARAMS, X)
 )
 
@@ -415,6 +416,7 @@ aspace, gl = (
     ArrowSpaceBuilder()
     .with_seed(SEED)
     .with_dims_reduction(False, None)
+    .with_sampling("simple", 1.0)   # ArrowSpaceBuilder defaults to 0.6 sampling; keep all items
     .build(GRAPH_PARAMS, X)
 )
 
@@ -533,6 +535,7 @@ aspace_s, gl_s = (
     ArrowSpaceBuilder()
     .with_seed(SEED)
     .with_dims_reduction(False, None)
+    .with_sampling("simple", 1.0)   # ArrowSpaceBuilder defaults to 0.6 sampling; keep all items
     .build({"eps": 0.25, "k": 3, "topk": 8, "p": 2.0, "sigma": 0.25}, X)
 )
 ser_s = sequence_by_graph(gl_s)
@@ -725,6 +728,7 @@ aspace, gl = (
     ArrowSpaceBuilder()
     .with_seed(SEED)
     .with_dims_reduction(False, None)
+    .with_sampling("simple", 1.0)   # ArrowSpaceBuilder defaults to 0.6 sampling; keep all items
     .build(GRAPH_PARAMS, X)
 )
 lam = np.asarray(aspace.lambdas())
@@ -841,6 +845,7 @@ aspace_e, gl_e = (
     .with_seed(SEED)
     .with_cluster_radius(0.02)
     .with_cluster_max_clusters(600)
+    .with_sampling("simple", 1.0)   # explicit full sampling (binding may still override energy internals)
     .build_energy(X, ENERGY_PARAMS, GRAPH_PARAMS)
 )
 print(f"energy build: nitems={aspace_e.nitems}  subcentroids={aspace_e.nclusters}  "
