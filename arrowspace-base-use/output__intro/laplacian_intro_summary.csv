@@ -1,7 +1,8 @@
 check,value
-"gl.shape equals (D, D) — feature-space L_F","(12, 12)"
+"gl.shape equals (D, D) — feature-space L_F","(128, 128)"
 degenerate lambdas,1
-bridge share in top lambda decile,0.6
-tau=1.0 equals cosine top-20,1
-bridge items evicted from top-100 (tau 1.0 -> 0.1),20
-manual vs API lambda-tau: mean |normalised diff|,0.519
+Fiedler value of L_F,0.713
+"spearman(lambda-tau, eff-dims) — unsupervised sparsity detector",-0.583
+tau=1.0 equals cosine top-20,1.0
+tail lambda-ordering at tau=0.1 (spearman),0.907
+manual vs API score spearman / mean-abs-diff,-0.229 / 4.576

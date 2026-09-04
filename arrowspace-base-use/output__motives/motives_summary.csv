@@ -1,6 +1,7 @@
 pipeline,quantity,value
-eigen,eigen dimension motifs,2
-eigen,max motif dims touched (eigen),7
-energy,item motifs,5
-energy,pure-block item motifs (purity == 1),2
-energy,subgraphs w/ Rayleigh <= 1e-9,4
+eigen,eigen dimension motifs (default cfg),18
+eigen,eigen dimension motifs (tuned cfg),16
+energy,subcentroids in energy build,300
+energy,item motifs,25
+energy,pure item motifs (>95% single cluster),9
+energy,subgraph dicts with Rayleigh computed,24
