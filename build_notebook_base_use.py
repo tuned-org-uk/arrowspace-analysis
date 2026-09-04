@@ -646,6 +646,33 @@ md(nb, r'''# Base-use 02 — The ArrowSpace Motives API (`spot_motives_*`, `spot
 local structures** in its Laplacians — cohesive, triangle-dense, low-Rayleigh subgraphs —
 and project them back to items?
 
+**Background — motifs and subgraph spotting.** Network motifs (Milo et al. 2002) are the
+recurring, statistically over-represented interaction patterns — triangles, near-cliques,
+feed-forward loops — that act as the *building blocks* of complex graphs: in a social
+graph a triangle is "a friend group", in a regulatory network a loop is "a switch".
+Spotting cohesive subgraphs generalises this to *which nodes* form each block, and is the
+workhorse behind community detection, deduplication, and anomaly hunting. Classical
+tooling is combinatorial: count triangles against degree-preserving nulls, expand greedily
+toward clique-ness, partition by cut size.
+
+**What spectral analysis contributes.** Spectral graph theory turns "how cohesive is this
+set?" from a counting heuristic into algebra: a set $S$ is tightly connected when its
+indicator has a low Rayleigh quotient $R_L(1_S)$ on the Laplacian (small boundary per
+node, by the Cheeger correspondence), and the Fiedler value bounds how well any graph can
+be cut. So spectral methods validate motif *candidates* by energy rather than by count
+alone — the same mathematics that ranks items by smoothness ranks subgraphs by cohesion.
+
+**What ArrowSpace brings.** The detector is fused with the index rather than bolted on:
+seeding, expansion, and Rayleigh validation all run on the Laplacian the index already
+built for $\lambda\tau$ scoring and search — no second graph, no recomputation. Motifs
+are detected in the index's *compressed* node spaces (centroids on the eigen track,
+subcentroids on the energy track) and projected to **item indices** through the index's
+own bookkeeping, so the granularity of what a "building block" means is a build
+parameter (whole-cluster unions vs sub-cluster pockets). And the failure modes that
+historically made motif APIs dangerous — misread node spaces, silent config typos — are
+now typed contracts: documented node spaces, `ValueError` on the wrong pipeline,
+`TypeError` on unknown keys, deterministic tie-breaking throughout.
+
 Since arrowspace 0.28 the bindings expose five motif calls on the built `ArrowSpace`
 object (each takes the `GraphLaplacian` plus a config dict; pass `None` for defaults):
 
