@@ -1,0 +1,6 @@
+pipeline,quantity,value
+eigen,eigen dimension motifs,2
+eigen,max motif dims touched (eigen),7
+energy,item motifs,5
+energy,pure-block item motifs (purity == 1),2
+energy,subgraphs w/ Rayleigh <= 1e-9,4

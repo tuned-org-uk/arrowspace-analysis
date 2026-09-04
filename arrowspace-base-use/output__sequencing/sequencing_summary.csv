@@ -1,0 +1,8 @@
+quantity,value
+lambda curriculum: mean windowed purity,0.81
+lambda curriculum: random-order baseline,0.308
+lambda curriculum: bridge share in top decile,0.6
+graph seriation: bandwidth (build order),3.652
+graph seriation: bandwidth (seriated),3.739
+graph seriation: components (dense),1.0
+graph seriation: components (sparse),9.0

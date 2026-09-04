@@ -1,0 +1,7 @@
+check,value
+"gl.shape equals (D, D) — feature-space L_F","(12, 12)"
+degenerate lambdas,1
+bridge share in top lambda decile,0.6
+tau=1.0 equals cosine top-20,1
+bridge items evicted from top-100 (tau 1.0 -> 0.1),20
+manual vs API lambda-tau: mean |normalised diff|,0.519
