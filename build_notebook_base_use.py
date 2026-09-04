@@ -448,6 +448,39 @@ print("descending reverses the head:", np.asarray(rev.order)[:8])
 # Determinism: same scores -> byte-identical order (ties break on ascending index).
 assert np.array_equal(order, np.asarray(sequence_by_lambda(lam).order))''')
 
+md(nb, r'''### How to read the next two plots — and what you would use them for
+
+**Curriculum strip (top).** The 1000 items are laid out left → right in
+`sequence_by_lambda` order and coloured by the cluster they belong to (recovered by k-means,
+never shown to the index). Think of it as a permutation of a labelled set rendered as a
+1-D heat strip. Long single-colour runs mean the ordering keeps a basin *contiguous*;
+fine interleaving means the score does not separate those items. Two things to look at:
+the run lengths, and which colour dominates the right-hand end — that is the tail of the
+curriculum, where the spectrally rough / transitional items collect.
+
+**Curriculum purity (bottom).** A sliding window of 50 consecutive positions is dragged
+along the sequence; at each stop we record the *modal-cluster share* — the fraction of the
+window that belongs to its most common cluster. It is a local homogeneity statistic
+(a running purity, cousin of a windowed Rand index). The dashed line and band are the same
+statistic on random permutations of the items (mean and min–max over 10 draws); it sits
+near the largest cluster's prior (400/1000 ≈ 0.4, lifted by finite-window bias). Anything
+the black curve gains over that band is ordering structure $\lambda\tau$ found without labels.
+
+**Why you would care.**
+
+- *Staged training / curriculum learning.* Train on the head (coherent basin interiors),
+  hold the tail back for later stages or for audit — the strip shows where the "hard"
+  regime begins, the purity curve tells you how clean the early stages are.
+- *Batch construction for retrieval or contrastive objectives.* Contiguous single-colour
+  runs are natural batches with few accidental hard negatives; the transitions between
+  runs are where to mine hard negatives deliberately.
+- *Data QA and labelling triage.* The tail concentrates outliers and ambiguous items; when
+  purity drops there, that is the slice to send to human review first — the strip's right
+  edge is a "where to look" map for a corpus you have never labelled.
+- *Index tuning sanity check.* If the black curve hugs the random band, the graph wiring
+  (`eps`, `k`) is not carrying signal — the ordering-level twin of the degenerate-$\lambda$
+  quality gate from notebook 00.''')
+
 code(nb, '''\
 # Quantify the curriculum: sliding-window cluster purity vs random orders, and the
 # sparsity gradient along the sequence (labels never entered the index).
